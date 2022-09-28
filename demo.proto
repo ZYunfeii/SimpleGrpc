@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package ZYF;
+service YServer{
+rpc GetNum(Num) returns (Res) {}
+}
+
+message Num {
+int32 x = 1;
+}
+
+message Res {
+int32 y = 1;
+}
