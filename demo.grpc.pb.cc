@@ -23,6 +23,7 @@ namespace ZYF {
 
 static const char* YServer_method_names[] = {
   "/ZYF.YServer/GetNum",
+  "/ZYF.YServer/GetVec",
 };
 
 std::unique_ptr< YServer::Stub> YServer::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -33,6 +34,7 @@ std::unique_ptr< YServer::Stub> YServer::NewStub(const std::shared_ptr< ::grpc::
 
 YServer::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
   : channel_(channel), rpcmethod_GetNum_(YServer_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetVec_(YServer_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
   {}
 
 ::grpc::Status YServer::Stub::GetNum(::grpc::ClientContext* context, const ::ZYF::Num& request, ::ZYF::Res* response) {
@@ -58,6 +60,22 @@ void YServer::Stub::async::GetNum(::grpc::ClientContext* context, const ::ZYF::N
   return result;
 }
 
+::grpc::ClientReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* YServer::Stub::GetVecRaw(::grpc::ClientContext* context) {
+  return ::grpc::internal::ClientReaderWriterFactory< ::ZYF::Vec, ::ZYF::Vec>::Create(channel_.get(), rpcmethod_GetVec_, context);
+}
+
+void YServer::Stub::async::GetVec(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::ZYF::Vec,::ZYF::Vec>* reactor) {
+  ::grpc::internal::ClientCallbackReaderWriterFactory< ::ZYF::Vec,::ZYF::Vec>::Create(stub_->channel_.get(), stub_->rpcmethod_GetVec_, context, reactor);
+}
+
+::grpc::ClientAsyncReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* YServer::Stub::AsyncGetVecRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::ZYF::Vec, ::ZYF::Vec>::Create(channel_.get(), cq, rpcmethod_GetVec_, context, true, tag);
+}
+
+::grpc::ClientAsyncReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* YServer::Stub::PrepareAsyncGetVecRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::ZYF::Vec, ::ZYF::Vec>::Create(channel_.get(), cq, rpcmethod_GetVec_, context, false, nullptr);
+}
+
 YServer::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       YServer_method_names[0],
@@ -69,6 +87,16 @@ YServer::Service::Service() {
              ::ZYF::Res* resp) {
                return service->GetNum(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      YServer_method_names[1],
+      ::grpc::internal::RpcMethod::BIDI_STREAMING,
+      new ::grpc::internal::BidiStreamingHandler< YServer::Service, ::ZYF::Vec, ::ZYF::Vec>(
+          [](YServer::Service* service,
+             ::grpc::ServerContext* ctx,
+             ::grpc::ServerReaderWriter<::ZYF::Vec,
+             ::ZYF::Vec>* stream) {
+               return service->GetVec(ctx, stream);
+             }, this)));
 }
 
 YServer::Service::~Service() {
@@ -78,6 +106,12 @@ YServer::Service::~Service() {
   (void) context;
   (void) request;
   (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status YServer::Service::GetVec(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* stream) {
+  (void) context;
+  (void) stream;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 

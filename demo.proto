@@ -2,13 +2,18 @@ syntax = "proto3";
 
 package ZYF;
 service YServer{
-rpc GetNum(Num) returns (Res) {}
+    rpc GetNum(Num) returns (Res) {}
+    rpc GetVec(stream Vec)  returns (stream Vec) {}
 }
 
 message Num {
-int32 x = 1;
+    int32 x = 1;
 }
 
 message Res {
-int32 y = 1;
+    int32 y = 1;
+}
+
+message Vec {
+    repeated int32 v = 1;
 }

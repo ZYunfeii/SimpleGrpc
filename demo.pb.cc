@@ -41,8 +41,21 @@ struct ResDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ResDefaultTypeInternal _Res_default_instance_;
+constexpr Vec::Vec(
+  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
+  : v_()
+  , _v_cached_byte_size_(0){}
+struct VecDefaultTypeInternal {
+  constexpr VecDefaultTypeInternal()
+    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  ~VecDefaultTypeInternal() {}
+  union {
+    Vec _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT VecDefaultTypeInternal _Vec_default_instance_;
 }  // namespace ZYF
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_demo_2eproto[2];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_demo_2eproto[3];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_demo_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_demo_2eproto = nullptr;
 
@@ -61,26 +74,36 @@ const uint32_t TableStruct_demo_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::ZYF::Res, y_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::ZYF::Vec, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::ZYF::Vec, v_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::ZYF::Num)},
   { 7, -1, -1, sizeof(::ZYF::Res)},
+  { 14, -1, -1, sizeof(::ZYF::Vec)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::ZYF::_Num_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::ZYF::_Res_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::ZYF::_Vec_default_instance_),
 };
 
 const char descriptor_table_protodef_demo_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\ndemo.proto\022\003ZYF\"\020\n\003Num\022\t\n\001x\030\001 \001(\005\"\020\n\003R"
-  "es\022\t\n\001y\030\001 \001(\0052)\n\007YServer\022\036\n\006GetNum\022\010.ZYF"
-  ".Num\032\010.ZYF.Res\"\000b\006proto3"
+  "es\022\t\n\001y\030\001 \001(\005\"\020\n\003Vec\022\t\n\001v\030\001 \003(\0052M\n\007YServ"
+  "er\022\036\n\006GetNum\022\010.ZYF.Num\032\010.ZYF.Res\"\000\022\"\n\006Ge"
+  "tVec\022\010.ZYF.Vec\032\010.ZYF.Vec\"\000(\0010\001b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_demo_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_demo_2eproto = {
-  false, false, 104, descriptor_table_protodef_demo_2eproto, "demo.proto", 
-  &descriptor_table_demo_2eproto_once, nullptr, 0, 2,
+  false, false, 158, descriptor_table_protodef_demo_2eproto, "demo.proto", 
+  &descriptor_table_demo_2eproto_once, nullptr, 0, 3,
   schemas, file_default_instances, TableStruct_demo_2eproto::offsets,
   file_level_metadata_demo_2eproto, file_level_enum_descriptors_demo_2eproto, file_level_service_descriptors_demo_2eproto,
 };
@@ -448,6 +471,198 @@ void Res::InternalSwap(Res* other) {
       file_level_metadata_demo_2eproto[1]);
 }
 
+// ===================================================================
+
+class Vec::_Internal {
+ public:
+};
+
+Vec::Vec(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned),
+  v_(arena) {
+  SharedCtor();
+  if (!is_message_owned) {
+    RegisterArenaDtor(arena);
+  }
+  // @@protoc_insertion_point(arena_constructor:ZYF.Vec)
+}
+Vec::Vec(const Vec& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      v_(from.v_) {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:ZYF.Vec)
+}
+
+inline void Vec::SharedCtor() {
+}
+
+Vec::~Vec() {
+  // @@protoc_insertion_point(destructor:ZYF.Vec)
+  if (GetArenaForAllocation() != nullptr) return;
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+inline void Vec::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void Vec::ArenaDtor(void* object) {
+  Vec* _this = reinterpret_cast< Vec* >(object);
+  (void)_this;
+}
+void Vec::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void Vec::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+
+void Vec::Clear() {
+// @@protoc_insertion_point(message_clear_start:ZYF.Vec)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  v_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* Vec::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // repeated int32 v = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedInt32Parser(_internal_mutable_v(), ptr, ctx);
+          CHK_(ptr);
+        } else if (static_cast<uint8_t>(tag) == 8) {
+          _internal_add_v(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr));
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* Vec::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ZYF.Vec)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated int32 v = 1;
+  {
+    int byte_size = _v_cached_byte_size_.load(std::memory_order_relaxed);
+    if (byte_size > 0) {
+      target = stream->WriteInt32Packed(
+          1, _internal_v(), byte_size, target);
+    }
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ZYF.Vec)
+  return target;
+}
+
+size_t Vec::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ZYF.Vec)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated int32 v = 1;
+  {
+    size_t data_size = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      Int32Size(this->v_);
+    if (data_size > 0) {
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+            static_cast<int32_t>(data_size));
+    }
+    int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(data_size);
+    _v_cached_byte_size_.store(cached_size,
+                                    std::memory_order_relaxed);
+    total_size += data_size;
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Vec::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
+    Vec::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Vec::GetClassData() const { return &_class_data_; }
+
+void Vec::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
+                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+  static_cast<Vec *>(to)->MergeFrom(
+      static_cast<const Vec &>(from));
+}
+
+
+void Vec::MergeFrom(const Vec& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:ZYF.Vec)
+  GOOGLE_DCHECK_NE(&from, this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  v_.MergeFrom(from.v_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void Vec::CopyFrom(const Vec& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ZYF.Vec)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Vec::IsInitialized() const {
+  return true;
+}
+
+void Vec::InternalSwap(Vec* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  v_.InternalSwap(&other->v_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata Vec::GetMetadata() const {
+  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+      &descriptor_table_demo_2eproto_getter, &descriptor_table_demo_2eproto_once,
+      file_level_metadata_demo_2eproto[2]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace ZYF
 PROTOBUF_NAMESPACE_OPEN
@@ -456,6 +671,9 @@ template<> PROTOBUF_NOINLINE ::ZYF::Num* Arena::CreateMaybeMessage< ::ZYF::Num >
 }
 template<> PROTOBUF_NOINLINE ::ZYF::Res* Arena::CreateMaybeMessage< ::ZYF::Res >(Arena* arena) {
   return Arena::CreateMessageInternal< ::ZYF::Res >(arena);
+}
+template<> PROTOBUF_NOINLINE ::ZYF::Vec* Arena::CreateMaybeMessage< ::ZYF::Vec >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::ZYF::Vec >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

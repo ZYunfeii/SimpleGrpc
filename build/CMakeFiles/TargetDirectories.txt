@@ -1,5 +1,0 @@
-/home/yunfei/MyProject/SimpleGrpc/build/CMakeFiles/rebuild_cache.dir
-/home/yunfei/MyProject/SimpleGrpc/build/CMakeFiles/grpc_proto.dir
-/home/yunfei/MyProject/SimpleGrpc/build/CMakeFiles/demoServer.dir
-/home/yunfei/MyProject/SimpleGrpc/build/CMakeFiles/demoClient.dir
-/home/yunfei/MyProject/SimpleGrpc/build/CMakeFiles/edit_cache.dir

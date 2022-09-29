@@ -42,11 +42,21 @@ class YServer final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ZYF::Res>> PrepareAsyncGetNum(::grpc::ClientContext* context, const ::ZYF::Num& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::ZYF::Res>>(PrepareAsyncGetNumRaw(context, request, cq));
     }
+    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::ZYF::Vec, ::ZYF::Vec>> GetVec(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::ZYF::Vec, ::ZYF::Vec>>(GetVecRaw(context));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::ZYF::Vec, ::ZYF::Vec>> AsyncGetVec(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::ZYF::Vec, ::ZYF::Vec>>(AsyncGetVecRaw(context, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::ZYF::Vec, ::ZYF::Vec>> PrepareAsyncGetVec(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::ZYF::Vec, ::ZYF::Vec>>(PrepareAsyncGetVecRaw(context, cq));
+    }
     class async_interface {
      public:
       virtual ~async_interface() {}
       virtual void GetNum(::grpc::ClientContext* context, const ::ZYF::Num* request, ::ZYF::Res* response, std::function<void(::grpc::Status)>) = 0;
       virtual void GetNum(::grpc::ClientContext* context, const ::ZYF::Num* request, ::ZYF::Res* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void GetVec(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::ZYF::Vec,::ZYF::Vec>* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -54,6 +64,9 @@ class YServer final {
    private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::ZYF::Res>* AsyncGetNumRaw(::grpc::ClientContext* context, const ::ZYF::Num& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::ZYF::Res>* PrepareAsyncGetNumRaw(::grpc::ClientContext* context, const ::ZYF::Num& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderWriterInterface< ::ZYF::Vec, ::ZYF::Vec>* GetVecRaw(::grpc::ClientContext* context) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::ZYF::Vec, ::ZYF::Vec>* AsyncGetVecRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::ZYF::Vec, ::ZYF::Vec>* PrepareAsyncGetVecRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -65,11 +78,21 @@ class YServer final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ZYF::Res>> PrepareAsyncGetNum(::grpc::ClientContext* context, const ::ZYF::Num& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::ZYF::Res>>(PrepareAsyncGetNumRaw(context, request, cq));
     }
+    std::unique_ptr< ::grpc::ClientReaderWriter< ::ZYF::Vec, ::ZYF::Vec>> GetVec(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriter< ::ZYF::Vec, ::ZYF::Vec>>(GetVecRaw(context));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::ZYF::Vec, ::ZYF::Vec>> AsyncGetVec(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::ZYF::Vec, ::ZYF::Vec>>(AsyncGetVecRaw(context, cq, tag));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::ZYF::Vec, ::ZYF::Vec>> PrepareAsyncGetVec(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::ZYF::Vec, ::ZYF::Vec>>(PrepareAsyncGetVecRaw(context, cq));
+    }
     class async final :
       public StubInterface::async_interface {
      public:
       void GetNum(::grpc::ClientContext* context, const ::ZYF::Num* request, ::ZYF::Res* response, std::function<void(::grpc::Status)>) override;
       void GetNum(::grpc::ClientContext* context, const ::ZYF::Num* request, ::ZYF::Res* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void GetVec(::grpc::ClientContext* context, ::grpc::ClientBidiReactor< ::ZYF::Vec,::ZYF::Vec>* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -83,7 +106,11 @@ class YServer final {
     class async async_stub_{this};
     ::grpc::ClientAsyncResponseReader< ::ZYF::Res>* AsyncGetNumRaw(::grpc::ClientContext* context, const ::ZYF::Num& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::ZYF::Res>* PrepareAsyncGetNumRaw(::grpc::ClientContext* context, const ::ZYF::Num& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* GetVecRaw(::grpc::ClientContext* context) override;
+    ::grpc::ClientAsyncReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* AsyncGetVecRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* PrepareAsyncGetVecRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_GetNum_;
+    const ::grpc::internal::RpcMethod rpcmethod_GetVec_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -92,6 +119,7 @@ class YServer final {
     Service();
     virtual ~Service();
     virtual ::grpc::Status GetNum(::grpc::ServerContext* context, const ::ZYF::Num* request, ::ZYF::Res* response);
+    virtual ::grpc::Status GetVec(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* stream);
   };
   template <class BaseClass>
   class WithAsyncMethod_GetNum : public BaseClass {
@@ -113,7 +141,27 @@ class YServer final {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_GetNum<Service > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_GetVec : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_GetVec() {
+      ::grpc::Service::MarkMethodAsync(1);
+    }
+    ~WithAsyncMethod_GetVec() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetVec(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestGetVec(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(1, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_GetNum<WithAsyncMethod_GetVec<Service > > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_GetNum : public BaseClass {
    private:
@@ -141,7 +189,30 @@ class YServer final {
     virtual ::grpc::ServerUnaryReactor* GetNum(
       ::grpc::CallbackServerContext* /*context*/, const ::ZYF::Num* /*request*/, ::ZYF::Res* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_GetNum<Service > CallbackService;
+  template <class BaseClass>
+  class WithCallbackMethod_GetVec : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_GetVec() {
+      ::grpc::Service::MarkMethodCallback(1,
+          new ::grpc::internal::CallbackBidiHandler< ::ZYF::Vec, ::ZYF::Vec>(
+            [this](
+                   ::grpc::CallbackServerContext* context) { return this->GetVec(context); }));
+    }
+    ~WithCallbackMethod_GetVec() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetVec(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerBidiReactor< ::ZYF::Vec, ::ZYF::Vec>* GetVec(
+      ::grpc::CallbackServerContext* /*context*/)
+      { return nullptr; }
+  };
+  typedef WithCallbackMethod_GetNum<WithCallbackMethod_GetVec<Service > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_GetNum : public BaseClass {
@@ -156,6 +227,23 @@ class YServer final {
     }
     // disable synchronous version of this method
     ::grpc::Status GetNum(::grpc::ServerContext* /*context*/, const ::ZYF::Num* /*request*/, ::ZYF::Res* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_GetVec : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_GetVec() {
+      ::grpc::Service::MarkMethodGeneric(1);
+    }
+    ~WithGenericMethod_GetVec() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetVec(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* /*stream*/)  override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -181,6 +269,26 @@ class YServer final {
     }
   };
   template <class BaseClass>
+  class WithRawMethod_GetVec : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_GetVec() {
+      ::grpc::Service::MarkMethodRaw(1);
+    }
+    ~WithRawMethod_GetVec() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetVec(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestGetVec(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(1, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
   class WithRawCallbackMethod_GetNum : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
@@ -201,6 +309,29 @@ class YServer final {
     }
     virtual ::grpc::ServerUnaryReactor* GetNum(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_GetVec : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_GetVec() {
+      ::grpc::Service::MarkMethodRawCallback(1,
+          new ::grpc::internal::CallbackBidiHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context) { return this->GetVec(context); }));
+    }
+    ~WithRawCallbackMethod_GetVec() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status GetVec(::grpc::ServerContext* /*context*/, ::grpc::ServerReaderWriter< ::ZYF::Vec, ::ZYF::Vec>* /*stream*/)  override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerBidiReactor< ::grpc::ByteBuffer, ::grpc::ByteBuffer>* GetVec(
+      ::grpc::CallbackServerContext* /*context*/)
+      { return nullptr; }
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_GetNum : public BaseClass {

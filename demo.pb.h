@@ -46,7 +46,7 @@ struct TableStruct_demo_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[2]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[3]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -60,10 +60,14 @@ extern NumDefaultTypeInternal _Num_default_instance_;
 class Res;
 struct ResDefaultTypeInternal;
 extern ResDefaultTypeInternal _Res_default_instance_;
+class Vec;
+struct VecDefaultTypeInternal;
+extern VecDefaultTypeInternal _Vec_default_instance_;
 }  // namespace ZYF
 PROTOBUF_NAMESPACE_OPEN
 template<> ::ZYF::Num* Arena::CreateMaybeMessage<::ZYF::Num>(Arena*);
 template<> ::ZYF::Res* Arena::CreateMaybeMessage<::ZYF::Res>(Arena*);
+template<> ::ZYF::Vec* Arena::CreateMaybeMessage<::ZYF::Vec>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace ZYF {
 
@@ -359,6 +363,166 @@ class Res final :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_demo_2eproto;
 };
+// -------------------------------------------------------------------
+
+class Vec final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:ZYF.Vec) */ {
+ public:
+  inline Vec() : Vec(nullptr) {}
+  ~Vec() override;
+  explicit constexpr Vec(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  Vec(const Vec& from);
+  Vec(Vec&& from) noexcept
+    : Vec() {
+    *this = ::std::move(from);
+  }
+
+  inline Vec& operator=(const Vec& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Vec& operator=(Vec&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const Vec& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const Vec* internal_default_instance() {
+    return reinterpret_cast<const Vec*>(
+               &_Vec_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(Vec& a, Vec& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(Vec* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Vec* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  Vec* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<Vec>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const Vec& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const Vec& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to, const ::PROTOBUF_NAMESPACE_ID::Message& from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Vec* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "ZYF.Vec";
+  }
+  protected:
+  explicit Vec(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kVFieldNumber = 1,
+  };
+  // repeated int32 v = 1;
+  int v_size() const;
+  private:
+  int _internal_v_size() const;
+  public:
+  void clear_v();
+  private:
+  int32_t _internal_v(int index) const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >&
+      _internal_v() const;
+  void _internal_add_v(int32_t value);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >*
+      _internal_mutable_v();
+  public:
+  int32_t v(int index) const;
+  void set_v(int index, int32_t value);
+  void add_v(int32_t value);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >&
+      v() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >*
+      mutable_v();
+
+  // @@protoc_insertion_point(class_scope:ZYF.Vec)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t > v_;
+  mutable std::atomic<int> _v_cached_byte_size_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_demo_2eproto;
+};
 // ===================================================================
 
 
@@ -414,9 +578,62 @@ inline void Res::set_y(int32_t value) {
   // @@protoc_insertion_point(field_set:ZYF.Res.y)
 }
 
+// -------------------------------------------------------------------
+
+// Vec
+
+// repeated int32 v = 1;
+inline int Vec::_internal_v_size() const {
+  return v_.size();
+}
+inline int Vec::v_size() const {
+  return _internal_v_size();
+}
+inline void Vec::clear_v() {
+  v_.Clear();
+}
+inline int32_t Vec::_internal_v(int index) const {
+  return v_.Get(index);
+}
+inline int32_t Vec::v(int index) const {
+  // @@protoc_insertion_point(field_get:ZYF.Vec.v)
+  return _internal_v(index);
+}
+inline void Vec::set_v(int index, int32_t value) {
+  v_.Set(index, value);
+  // @@protoc_insertion_point(field_set:ZYF.Vec.v)
+}
+inline void Vec::_internal_add_v(int32_t value) {
+  v_.Add(value);
+}
+inline void Vec::add_v(int32_t value) {
+  _internal_add_v(value);
+  // @@protoc_insertion_point(field_add:ZYF.Vec.v)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >&
+Vec::_internal_v() const {
+  return v_;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >&
+Vec::v() const {
+  // @@protoc_insertion_point(field_list:ZYF.Vec.v)
+  return _internal_v();
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >*
+Vec::_internal_mutable_v() {
+  return &v_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< int32_t >*
+Vec::mutable_v() {
+  // @@protoc_insertion_point(field_mutable_list:ZYF.Vec.v)
+  return _internal_mutable_v();
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 
